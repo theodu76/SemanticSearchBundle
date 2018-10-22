@@ -34,6 +34,9 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        SemanticSearchBundle.getArticles: "@SemanticSearchBundle.getArticles"
+        SemanticSearchBundle.classifyArticles: "@SemanticSearchBundle.classifyArticles"
 
 # Doctrine Configuration
 doctrine:
