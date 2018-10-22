@@ -1,0 +1,4 @@
+services:
+#    i_d_city_semantic_search.example:
+#        class: iDCity\SemanticSearchBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

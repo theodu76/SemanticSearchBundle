@@ -1,0 +1,4 @@
+
+i_d_city_semantic_search_homepage:
+    path:     /research
+    defaults: { _controller: iDCitySemanticSearchBundle:SemanticSearch:research }

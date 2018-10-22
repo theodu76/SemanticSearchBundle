@@ -1,0 +1,4 @@
+i_d_city_semantic_search:
+    resource: "@iDCitySemanticSearchBundle/Resources/config/routing.yml"
+    prefix:   /
+
