@@ -11,11 +11,12 @@
 
 <div class=researchBar>
 	<h3>Barre de recherche</h3>
-	<form>  
-	<input type = "search" name = "terme" id = "terme" placeholder="Rechercher sur le site…">
+	<form action accept-charset="UTF-8">  
+	<input type = "search" name = "terme" id = "by_name" placeholder="Rechercher sur le site…">
 	<input type = "button" name = "s" id= "s" value = "Rechercher">
 	</form> 
 </div>
+
 <div class=resultContainer>
 	<h3>Résultats obtenus</h3>
 	<hr>
@@ -35,12 +36,15 @@
 	
   	$('#s').click(function() {
 		
-	    var data = $('#terme')[0].value;
-	    console.log($('#terme'));
+	    var data = $('#by_name')[0].value;
+	    console.log($('#by_name'));
 	    console.log(data);
 	    var json = { words: data.split(' ').join('|')}
 	    //var json = JSON.stringify(eval('('+ str+ ')'));
 
+		
+		$('#article1').text("Je mange des bananes");
+		
 	    $.ajax({
 	        type: 'POST',
 	        url: 'http://localhost:3000',
