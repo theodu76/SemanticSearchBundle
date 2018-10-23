@@ -25,13 +25,13 @@ class SemanticSearchController extends Controller
 	}
 
 	public function responseAction(Request $request)
-{
-    if($request->isXMLHttpRequest()){
-        $words = $request->get('relevantWords');
-        $arrData = ['relevantWords' => $words];
-        return new JsonResponse($arrData);
-    }
+	{
+		if($request->isXMLHttpRequest()){
+			$words = $request->get('relevantWords');
+			$arrData = ['relevantWords' => $words];
+			return new JsonResponse($arrData);
+		}
 
-}
+	}
 
 }
