@@ -5,6 +5,7 @@ namespace iDCity\SemanticSearchBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -22,5 +23,15 @@ class SemanticSearchController extends Controller
 
 		return new Response ($content = $this->render('iDCitySemanticSearchBundle:SemanticSearch:view.html.twig'));
 	}
+
+	public function responseAction(Request $request)
+{
+    if($request->isXMLHttpRequest()){
+        $words = $request->get('relevantWords');
+        $arrData = ['relevantWords' => $words];
+        return new JsonResponse($arrData);
+    }
+
+}
 
 }

@@ -2,3 +2,7 @@
 i_d_city_semantic_search_homepage:
     path:     /research
     defaults: { _controller: iDCitySemanticSearchBundle:SemanticSearch:research }
+
+i_d_city_semantic_search_response:
+    path:     /response
+    defaults: { _controller: iDCitySemanticSearchBundle:SemanticSearch:response }

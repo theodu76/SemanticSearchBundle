@@ -8,7 +8,6 @@
 {% block idCitySemanticSearch_body %}
 
 
-
 <div class=researchBar>
 	<h3>Barre de recherche</h3>
 	<form action accept-charset="UTF-8">  
@@ -26,44 +25,37 @@
 </div>
 
 
-
-	
-
-
 <script>
-  $(document).ready(function(){
-	
-	
-  	$('#s').click(function() {
-		
-	    var data = $('#by_name')[0].value;
-	    console.log($('#by_name'));
-	    console.log(data);
-	    var json = { words: data.split(' ').join('|')}
-	    //var json = JSON.stringify(eval('('+ str+ ')'));
+	$(document).ready(function(){
+		$('#s').click(function() {
+			
+			const data = $('#by_name')[0].value;
+			const json = { words: data.split(' ').join('|')}
+			
+			$.ajax({
+				type: 'POST',
+				url: 'http://localhost:3000',
+				data: json,
+			}).done(function(responseFromNode) {
+				$.ajax({
+					type: 'POST',
+					url: "{{path('i_d_city_semantic_search_response')}}",
+					data: responseFromNode
+				}).done(function(responseFromSymfony) {
+					console.log(responseFromSymfony);
+					refreshPage(responseFromSymfony);
+				});  
+			});
 
-		
-		$('#article1').text("Je mange des bananes");
-		
-	    $.ajax({
-	        type: 'POST',
-	        url: 'http://localhost:3000',
-	        data: json,
-	      }).done(function(msg){
-	        refreshPage(msg);  
-		  });
+			function refreshPage(msg){
+				// Mettre à jour les données de la page
+				$('#article1').text(msg.relevantWords.join(' '));
+			}
 
-	    function refreshPage(msg){
-	    	// Mettre à jour les données de la page
-			$('#article1').text(msg.relevantWords.join(' '));
-	    }
+		});
 
-    });
-
-  });
+	});
 </script>
-
-
 
 
 {% endblock %}

@@ -4,11 +4,11 @@ services:
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
 
     SemanticSearchBundle.getArticles:
-        class: iDCity\SemanticSearchBundle\getArticles\getArticles.php
+        class: iDCity\SemanticSearchBundle\GetArticles
 
 
     SemanticSearchBundle.classifyArticles:
-        class: iDCity\SemanticSearchBundle\classifyArticles\classifyArticles.php
+        class: iDCity\SemanticSearchBundle\ClassifyArticles
 
 
 
