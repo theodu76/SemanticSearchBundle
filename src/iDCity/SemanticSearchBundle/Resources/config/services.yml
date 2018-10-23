@@ -3,12 +3,8 @@ services:
 #        class: iDCity\SemanticSearchBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
 
-    SemanticSearchBundle.getArticles:
-        class: iDCity\SemanticSearchBundle\getArticles\getArticles.php
-
-
-    SemanticSearchBundle.classifyArticles:
-        class: iDCity\SemanticSearchBundle\classifyArticles\classifyArticles.php
+    SemanticSearchBundle.GetArticles:
+        class: iDCity\SemanticSearchBundle\GetArticles
 
 
 
