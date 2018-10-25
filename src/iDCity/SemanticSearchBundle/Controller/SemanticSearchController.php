@@ -28,7 +28,16 @@ class SemanticSearchController extends Controller
 	{
 		if($request->isXMLHttpRequest()){
 			$words = $request->get('relevantWords');
-			$arrData = ['relevantWords' => $words];
+			$flatWords = array();
+			foreach ($words as $word) {
+				array_push($flatWords, $word['word']);
+				if (array_key_exists('categories', $word)) {
+					foreach ($word['categories'] as $category) {
+						array_push($flatWords, implode('|', $category));
+					}
+				}
+			}
+			$arrData = ['relevantWords' => implode('|', $flatWords)];
 			return new JsonResponse($arrData);
 		}
 
