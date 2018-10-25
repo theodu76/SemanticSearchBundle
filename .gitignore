@@ -9,4 +9,5 @@
 /build/
 /vendor/
 /bin/
+/tests/
 /composer.phar

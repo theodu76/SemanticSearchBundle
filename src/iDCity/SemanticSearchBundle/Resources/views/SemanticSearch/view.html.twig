@@ -8,13 +8,10 @@
 {% block idCitySemanticSearch_body %}
 
 
-
 <div class=researchBar>
 	<h3>Barre de recherche</h3>
-	<form action accept-charset="UTF-8">  
-	<input type = "search" name = "terme" id = "by_name" placeholder="Rechercher sur le site…">
-	<input type = "button" name = "s" id= "s" value = "Rechercher">
-	</form> 
+	<input type = "search" name = "terme" id = "researchText" placeholder="Rechercher sur le site…">
+	<input type = "button" name = "researchButton" id= "researchButton" value = "Rechercher">
 </div>
 
 <div class=resultContainer>
@@ -26,44 +23,59 @@
 </div>
 
 
-
-	
-
-
 <script>
-  $(document).ready(function(){
-	
-	
-  	$('#s').click(function() {
-		
-	    var data = $('#by_name')[0].value;
-	    console.log($('#by_name'));
-	    console.log(data);
-	    var json = { words: data.split(' ').join('|')}
-	    //var json = JSON.stringify(eval('('+ str+ ')'));
+	let previousText = '';
+	let currentText = '';
 
-		
-		$('#article1').text("Je mange des bananes");
-		
-	    $.ajax({
-	        type: 'POST',
-	        url: 'http://localhost:3000',
-	        data: json,
-	      }).done(function(msg){
-	        refreshPage(msg);  
-		  });
+	$(document).ready(function(){
+		// On fait la recherche quand on clique sur le bouton Rechercher
+		$('#researchButton').click(function() {
+			sendRequest();
+		});
 
-	    function refreshPage(msg){
-	    	// Mettre à jour les données de la page
-			$('#article1').text(msg.relevantWords.join(' '));
-	    }
+		// On fait la recherche quand on clique sur la touche Entrée
+		$(document).keypress(function(e) {
+			if(e.which == 13) {
+				sendRequest();
+			}
+		});
 
-    });
+		// On lance une recherche régulièrement si on a entré plus de 3 lettres et que l'on a modifié le texte depuis la dernière recherche
+		setInterval(function(){
+			currentText = $('#researchText')[0].value;
+			if (currentText.length > 3 && currentText !== previousText) {
+				sendRequest();
+			}
+		}, 1000);
+	});
 
-  });
+	function refreshPage(msg){
+		// Mettre à jour les données de la page
+		$('#article1').text(msg.relevantWords.join(' '));
+	}
+
+	function sendRequest() {
+		const researchText = $('#researchText')[0].value;
+		const jsonData = { words: researchText.split(' ').join('|')}
+			
+		previousText = researchText;
+
+		$.ajax({
+				type: 'POST',
+				url: 'http://localhost:3000',
+				data: jsonData,
+		}).done(function(responseFromNode) {
+			$.ajax({
+				type: 'POST',
+				url: "{{path('i_d_city_semantic_search_response')}}",
+				data: responseFromNode
+			}).done(function(responseFromSymfony) {
+				console.log(responseFromSymfony);
+				// refreshPage(responseFromSymfony);
+			});  
+		});
+	}
 </script>
-
-
 
 
 {% endblock %}
