@@ -7,14 +7,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use iDCity\SemanticBundle\Form\AdvertType;
-
 class SemanticSearchController extends Controller
 {
 	public function researchAction(){
@@ -24,4 +16,33 @@ class SemanticSearchController extends Controller
 		return new Response ($content = $this->render('iDCitySemanticSearchBundle:SemanticSearch:view.html.twig'));
 	}
 
+<<<<<<< HEAD
+=======
+	public function responseAction(Request $request)
+	{
+		if($request->isXMLHttpRequest()){
+			$words = $request->get('relevantWords');
+
+			/*
+			$flatWords = array();
+			foreach ($words as $word) {
+				array_push($flatWords, $word['word']);
+				if (array_key_exists('categories', $word)) {
+					foreach ($word['categories'] as $category) {
+						array_push($flatWords, implode('|', $category));
+					}
+				}
+			}
+			$arrData = ['relevantWords' => implode('|', $flatWords)];
+			*/
+
+			$reshape = $this->container->get('i_d_city_semantic_search.reshape_response');
+			$arrData = ['relevantWords' => $reshape->flatten($words)];
+
+			return new JsonResponse($arrData);
+		}
+
+	}
+
+>>>>>>> 0eb0cd467ff727d2a9a7b6346a3009bd2fba3b60
 }
