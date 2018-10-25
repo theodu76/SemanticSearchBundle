@@ -5,10 +5,9 @@ services:
 
     SemanticSearchBundle.getArticles:
         class: iDCity\SemanticSearchBundle\GetArticles
-
-
-    SemanticSearchBundle.classifyArticles:
-        class: iDCity\SemanticSearchBundle\ClassifyArticles
+    
+    i_d_city_semantic_search.reshape_response:
+        class: iDCity\SemanticSearchBundle\ReshapeResponse\ReshapeResponse
 
 
 
