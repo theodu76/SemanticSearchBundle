@@ -5,12 +5,9 @@ services:
 
     SemanticSearchBundle.GetArticles:
         class: iDCity\SemanticSearchBundle\GetArticles
-<<<<<<< HEAD
-=======
     
     i_d_city_semantic_search.reshape_response:
         class: iDCity\SemanticSearchBundle\ReshapeResponse\ReshapeResponse
->>>>>>> 0eb0cd467ff727d2a9a7b6346a3009bd2fba3b60
 
 
 

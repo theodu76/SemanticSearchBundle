@@ -16,8 +16,6 @@ class SemanticSearchController extends Controller
 		return new Response ($content = $this->render('iDCitySemanticSearchBundle:SemanticSearch:view.html.twig'));
 	}
 
-<<<<<<< HEAD
-=======
 	public function responseAction(Request $request)
 	{
 		if($request->isXMLHttpRequest()){
@@ -44,5 +42,4 @@ class SemanticSearchController extends Controller
 
 	}
 
->>>>>>> 0eb0cd467ff727d2a9a7b6346a3009bd2fba3b60
 }
