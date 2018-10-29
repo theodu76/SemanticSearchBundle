@@ -21,23 +21,21 @@ class SemanticSearchController extends Controller
 		if($request->isXMLHttpRequest()){
 			$words = $request->get('relevantWords');
 
-			/*
-			$flatWords = array();
-			foreach ($words as $word) {
-				array_push($flatWords, $word['word']);
-				if (array_key_exists('categories', $word)) {
-					foreach ($word['categories'] as $category) {
-						array_push($flatWords, implode('|', $category));
-					}
-				}
-			}
-			$arrData = ['relevantWords' => implode('|', $flatWords)];
-			*/
-
 			$reshape = $this->container->get('i_d_city_semantic_search.reshape_response');
+
+			// $repository = $this
+			// 	->getDoctrine()
+			// 	->getManager()
+			// 	->getRepository('AppBundle:Proposal');
+
+			// $proposals = $repository->findArticles($reshape->flatten($words));
+
 			$arrData = ['relevantWords' => $reshape->flatten($words)];
 
 			return new JsonResponse($arrData);
+			return $this->render('iDCitySemanticSearchBundle:SemanticSearch:articles.html.twig', array(
+				'proposals' => $proposals
+			));
 		}
 
 	}

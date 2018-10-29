@@ -9,7 +9,7 @@ namespace AppBundle\Entity;
 class ProposalRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function whereWordsInSection(QueryBuilder $qb, $words) {
+    private function whereWordsInSection(QueryBuilder $qb, $words) {
         // On 'applatit' la liste des mots avec un join en utilisant le caractère | pour transformer en regex
         $qb
             ->where('p.name LIKE :words')
@@ -21,8 +21,10 @@ class ProposalRepository extends \Doctrine\ORM\EntityRepository
     }
 
 
-    public function findArticles($arrayOfWords) {
+    public function findArticlesContainingWords($arrayOfWords) {
         $qb = $this->createQueryBuilder('p');
+
+        $this->whereWordsInSection($qb, $arrayOfWords);
 
         return $qb
                 ->getQuery()

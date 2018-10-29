@@ -1,0 +1,17 @@
+
+{% extends "SemanticSearchBundle::view.html.twig" %}
+
+
+{% block results %}{{ parent() }}
+
+    {% for proposal in proposals %}
+
+        <li id="proposal-{{ proposal.id }}" class="idea block" data-id="{{ proposal.id }}">
+
+        {% include '@AppBundle/Proposal/proposal_preview.html.twig' with {'proposal': proposal, 'currentStage': proposal.dialog.getCurrentStage(), 'target': '_self' } %}
+
+        </li>
+
+    {% endfor %}
+
+{% endblock %}
